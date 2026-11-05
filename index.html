@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Tuition fee register format for Google Sheets and Excel. Track monthly fees, part payments and attendance, and send WhatsApp fee reminders with your UPI ID. One-time &#8377;499.">
+<title>Tuition Fee Register Format for Google Sheets &amp; Excel | Format Wala</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a fee register come to life &#8212; ruled-ledger hero with a live demo table, then plain single-column selling copy */
+:root{
+  --paper:#FBFCFE; --paper-2:#EEF3FA; --rule:#D3DEEC; --ink:#13315C; --text:#1E2A38; --muted:#5A6B80;
+  --marigold:#E39B12; --marigold-ink:#5A3A00; --paid:#1E7D4F; --paid-bg:#DDF3E7; --due:#B3261E; --due-bg:#FBE1DE; --part:#8A5A00; --part-bg:#FFEBC7;
+  --wa:#1F9D55; --card:#FFFFFF;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E1622; --paper-2:#152132; --rule:#24344A; --ink:#A9C6EE; --text:#E3E9F1; --muted:#9AA9BC;
+  --marigold:#F2B33D; --marigold-ink:#2A1B00; --paid:#7BD7A4; --paid-bg:#123826; --due:#F4A49C; --due-bg:#3E1714; --part:#F3C76A; --part-bg:#3A2A0A;
+  --wa:#4CCB82; --card:#121D2C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E1622; --paper-2:#152132; --rule:#24344A; --ink:#A9C6EE; --text:#E3E9F1; --muted:#9AA9BC;
+  --marigold:#F2B33D; --marigold-ink:#2A1B00; --paid:#7BD7A4; --paid-bg:#123826; --due:#F4A49C; --due-bg:#3E1714; --part:#F3C76A; --part-bg:#3A2A0A;
+  --wa:#4CCB82; --card:#121D2C; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--text);font:16px/1.6 var(--body);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.draft{background:var(--marigold);color:var(--marigold-ink);font:500 13px/1.4 var(--mono)}
+.draft .wrap{padding-block:8px}
+h1,h2,h3{font-family:var(--display);color:var(--ink);text-wrap:balance;line-height:1.1;margin:0}
+h1{font-size:clamp(34px,5.4vw,58px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;letter-spacing:-.01em}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hero{background:repeating-linear-gradient(var(--paper) 0 31px,var(--rule) 31px 32px);border-bottom:1px solid var(--rule)}
+.hero .wrap{padding-block:56px 48px;display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:center}
+.hero-copy{display:grid;gap:20px;min-width:0}
+.lede{font-size:18px;max-width:34em;color:var(--text)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 16px var(--body);padding:13px 22px;border-radius:6px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:focus-visible,.send:focus-visible{outline:3px solid var(--marigold);outline-offset:2px}
+.price{font:500 15px var(--mono);color:var(--muted)}
+.price b{font:700 26px var(--display);color:var(--ink)}
+/* demo register */
+.register{background:var(--card);border:1px solid var(--rule);border-radius:10px;box-shadow:0 18px 40px -24px rgba(19,49,92,.45);min-width:0;overflow:hidden}
+.reg-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 16px;border-bottom:2px solid var(--ink)}
+.reg-head span{font:500 12px var(--mono);color:var(--muted)}
+.reg-head strong{font-family:var(--display);color:var(--ink)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;font-variant-numeric:tabular-nums}
+th{font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule)}
+td{padding:9px 12px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.num{font-family:var(--mono);text-align:right}
+.chip{display:inline-block;font:600 12px var(--body);padding:2px 9px;border-radius:99px}
+.chip.paid{background:var(--paid-bg);color:var(--paid)}
+.chip.due{background:var(--due-bg);color:var(--due)}
+.chip.part{background:var(--part-bg);color:var(--part)}
+.send{font:600 13px var(--body);color:var(--wa);background:none;border:1px solid currentColor;border-radius:5px;padding:4px 10px;cursor:pointer}
+.send[disabled]{color:var(--muted);border-color:var(--rule);cursor:default}
+.bubble-area{padding:14px 16px;background:var(--paper-2);border-top:1px solid var(--rule);display:grid;gap:6px}
+.bubble{background:var(--card);border:1px solid var(--rule);border-radius:10px 10px 10px 2px;padding:10px 12px;font-size:14px;max-width:44ch}
+.bubble small{display:block;font:400 11px var(--mono);color:var(--muted);margin-top:4px}
+.totals{display:flex;flex-wrap:wrap;gap:18px;padding:10px 16px;font:500 13px var(--mono);color:var(--muted);border-top:1px solid var(--rule)}
+.totals b{color:var(--ink)}
+/* sections */
+section{padding-block:64px}
+section + section{border-top:1px solid var(--rule)}
+.intro{display:grid;gap:14px;max-width:44em;margin-bottom:36px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.feature{display:grid;gap:8px;align-content:start}
+.feature .k{font:500 12px var(--mono);color:var(--marigold)}
+.tabs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:0;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--card)}
+.tab{padding:16px 18px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:grid;gap:4px}
+.tab b{font-family:var(--display);color:var(--ink);font-size:17px}
+.tab span{font-size:14px;color:var(--muted)}
+.compare{width:100%;background:var(--card);border:1px solid var(--rule);border-radius:8px}
+.compare td,.compare th{white-space:normal;vertical-align:top}
+.compare td:first-child{font-weight:600;color:var(--ink)}
+.faq{display:grid;gap:0;max-width:52em}
+details{border-bottom:1px solid var(--rule);padding:16px 0}
+summary{cursor:pointer;font:600 17px var(--body);color:var(--ink)}
+details p{margin-top:10px;color:var(--text);max-width:62ch}
+.buy{background:var(--ink);color:var(--paper)}
+.buy .wrap{padding-block:56px;display:grid;grid-template-columns:1.3fr 1fr;gap:32px;align-items:center}
+.buy h2{color:var(--paper)}
+.buy ul{margin:16px 0 0;padding-left:20px;display:grid;gap:6px}
+.buy .btn{background:var(--marigold);border-color:var(--marigold);color:var(--marigold-ink)}
+.buy .note{font:400 13px var(--mono);opacity:.8;margin-top:12px}
+.paybox{display:grid;gap:12px;justify-items:start}
+.paybox .big{font:800 54px/1 var(--display)}
+footer{padding-block:28px;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
+@media (max-width:860px){
+  .hero .wrap,.buy .wrap{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:560px){.grid{grid-template-columns:1fr} section{padding-block:44px}}
+@media (prefers-reduced-motion:no-preference){.bubble{animation:pop .25s ease-out}}
+@keyframes pop{from{transform:translateY(6px)}to{transform:none}}
+</style>
+<style>footer a{color:inherit} footer span{display:block}</style>
+</head>
+<body>
+
+
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Format Wala &#183; Tuition fee register for 5 to 200 students</span>
+      <h1>Know who has paid. Remind the rest in one tap.</h1>
+      <p class="lede">A ready-made Google Sheet that tracks monthly fees, part payments and attendance, and turns every pending fee into a polite WhatsApp message with your UPI ID. No app, no monthly subscription, and your data stays in your own Google Drive.</p>
+      <div class="cta-row">
+        <a class="btn" href="#buy">Get the sheet</a>
+        <span class="price"><b>&#8377;499</b> one-time</span>
+      </div>
+    </div>
+
+    <div class="register" aria-label="Sample fee register">
+      <div class="reg-head"><strong>Students &#183; November 2026</strong><span>sample data</span></div>
+      <div class="scroll">
+        <table>
+          <thead><tr><th>Student</th><th>Batch</th><th style="text-align:right">Balance</th><th>Status</th><th>Reminder</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <div class="totals"><span>Due <b>&#8377;11,700</b></span><span>Collected <b>&#8377;5,900</b></span><span>Pending <b>&#8377;5,800</b></span></div>
+      <div class="bubble-area" id="bubbleArea">
+        <span class="eyebrow">Message preview</span>
+        <div class="bubble" id="bubble">Tap <b>Send</b> on a pending row to see the reminder the sheet writes for you.<small>Opens WhatsApp with this text filled in. You press send.</small></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <div class="intro">
+        <span class="eyebrow">What it fixes</span>
+        <h2>The fee diary, the WhatsApp chats and the Excel file, in one place</h2>
+        <p>Most small centres track fees in a notebook, chase parents one chat at a time, and lose track of part payments. This sheet keeps one row per student and one row per payment, and works out the rest.</p>
+      </div>
+      <div class="grid">
+        <div class="feature"><span class="k">Fees</span><h3>Every student's status, every month</h3><p>Paid, partly paid or pending, worked out from the payments you log. Discounts and special fees per student. Students who left drop out automatically.</p></div>
+        <div class="feature"><span class="k">Reminders</span><h3>One-tap WhatsApp messages</h3><p>Each pending row gets a link that opens WhatsApp with the parent's name, amount, month and your UPI ID already written. Nothing is sent without you.</p></div>
+        <div class="feature"><span class="k">Receipts</span><h3>Numbered receipts, ready to share</h3><p>Every payment gets a receipt number. Type it in the Receipt tab and save it as a PDF from Google Sheets to send to the parent.</p></div>
+        <div class="feature"><span class="k">Attendance</span><h3>Monthly P / A / L grid</h3><p>Attendance percentage per student, with anyone under 75% highlighted so you can talk to parents early.</p></div>
+        <div class="feature"><span class="k">Dashboard</span><h3>This month at a glance</h3><p>Fees due, collected, pending, collection rate, money by payment mode, and a six-month trend chart.</p></div>
+        <div class="feature"><span class="k">Ownership</span><h3>Yours to keep</h3><p>A file in your Drive, not an account on someone's server. Works in Google Sheets on your phone and in Microsoft Excel.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="intro">
+        <span class="eyebrow">Inside the file</span>
+        <h2>Nine tabs, set up in about ten minutes</h2>
+      </div>
+      <div class="tabs">
+        <div class="tab"><b>Start Here</b><span>Step-by-step setup guide</span></div>
+        <div class="tab"><b>Dashboard</b><span>Due, collected, pending, trend</span></div>
+        <div class="tab"><b>Students</b><span>Fees, status, reminder links</span></div>
+        <div class="tab"><b>Payments</b><span>Log with auto receipt numbers</span></div>
+        <div class="tab"><b>Attendance</b><span>Monthly grid with percentages</span></div>
+        <div class="tab"><b>Batches</b><span>Fee per batch, batch-wise totals</span></div>
+        <div class="tab"><b>Receipt</b><span>Printable fee receipt</span></div>
+        <div class="tab"><b>Settings</b><span>Centre name, UPI ID, due date</span></div>
+        <div class="tab"><b>Lists</b><span>Dropdown values you can edit</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="intro">
+        <span class="eyebrow">Is it right for you?</span>
+        <h2>When a sheet beats an app, and when it doesn't</h2>
+      </div>
+      <div class="scroll">
+        <table class="compare">
+          <thead><tr><th></th><th>This sheet</th><th>Coaching apps</th><th>Notebook</th></tr></thead>
+          <tbody>
+            <tr><td>Cost</td><td>&#8377;499 once</td><td>Free tiers with limits, or monthly plans</td><td>Free</td></tr>
+            <tr><td>Where data lives</td><td>Your Google Drive</td><td>The app company's servers</td><td>Paper</td></tr>
+            <tr><td>Fee reminders</td><td>One tap per parent</td><td>Often automatic</td><td>Manual</td></tr>
+            <tr><td>Online fee payment inside the tool</td><td>No (shares your UPI ID)</td><td>Often yes</td><td>No</td></tr>
+            <tr><td>Best for</td><td>5 to 200 students, one owner</td><td>Large centres, many staff</td><td>A handful of students</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="intro"><span class="eyebrow">Questions</span><h2>Before you buy</h2></div>
+      <div class="faq">
+        <details><summary>Do I need Excel?</summary><p>No. A free Google account is enough. You get a copy link; the sheet opens in Google Sheets on phone or computer. To use Microsoft Excel instead, download your copy from File &#8250; Download &#8250; Microsoft Excel.</p></details>
+        <details><summary>Does it send WhatsApp messages automatically?</summary><p>No. It prepares each message and opens WhatsApp with the text filled in. You choose who to remind and press send yourself. This keeps you within WhatsApp's rules and in control of what parents receive.</p></details>
+        <details><summary>Can parents pay through the sheet?</summary><p>No. The reminder includes your UPI ID so parents can pay you directly. You then add the payment as one row.</p></details>
+        <details><summary>I'm not good with spreadsheets.</summary><p>You only type in the yellow cells: names, numbers, dates. Everything grey is calculated. The Start Here tab walks through setup, and sample rows show exactly what to enter.</p></details>
+        <details><summary>What if it doesn't work for me?</summary><p>Email <b>formatwala.support@gmail.com</b> within 2 days of purchase and we will either fix your problem or refund you.</p></details>
+        <details><summary>Will I get updates?</summary><p>Yes. All version 1 updates are free for buyers and sent to your purchase email.</p></details>
+      </div>
+    </div>
+  </section>
+<section id="free">
+  <div class="wrap">
+    <div class="intro">
+      <span class="eyebrow">Free download</span>
+      <h2>Try Fee Tracker Lite first</h2>
+      <p>A free sheet for up to 15 students: monthly fee, amount paid, balance and Paid / Partly paid / Pending status. No sign-up and no email needed. It opens in Excel, or upload it to Google Drive and open it with Google Sheets.</p>
+      <p><a class="btn ghost" href="files/FormatWala_Fee_Tracker_Lite_FREE.xlsx" download>Download Fee Tracker Lite (free)</a></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="buy" id="buy">
+  <div class="wrap">
+    <div>
+      <h2>Tuition Fee Register Format</h2>
+      <ul>
+        <li>Your own Google Sheets copy, downloadable as Excel from File &#8250; Download</li>
+        <li>Setup guide and fictitious sample data</li>
+        <li>Free version 1 updates</li>
+        <li>Email support at formatwala.support@gmail.com, 2-day fix-or-refund</li>
+      </ul>
+    </div>
+    <div class="paybox">
+      <span class="big">&#8377;499</span>
+      <a class="btn" href="https://rzp.io/rzp/5DxVcS1H">Buy now &#8211; &#8377;499</a>
+      <p class="note">Secure checkout via UPI, cards or netbanking. Your copy link opens right after payment, and the receipt is emailed to you.</p>
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap"><span>Format Wala &#183; Ready-made formats in Google Sheets and Excel for Indian small businesses &#183; Support: formatwala.support@gmail.com</span><span>A record-keeping template, not accounting or tax advice.</span><span><a href="refund.html">Refund policy</a> &#183; <a href="privacy.html">Privacy</a> &#183; <a href="terms.html">Terms</a> &#183; <a href="contact.html">Contact</a></span></div></footer>
+
+<script>
+const students=[
+ {n:"Aarav Sharma",p:"Ritu Sharma",b:"Class 10 Maths",bal:0,s:"paid"},
+ {n:"Diya Iyer",p:"Lakshmi Iyer",b:"Class 10 Maths",bal:1200,s:"due"},
+ {n:"Kabir Reddy",p:"Suresh Reddy",b:"Class 12 Physics",bal:0,s:"paid"},
+ {n:"Meera Nair",p:"Anil Nair",b:"Class 12 Physics",bal:1200,s:"part"},
+ {n:"Rohan Das",p:"Priya Das",b:"Spoken English",bal:1200,s:"due"},
+ {n:"Ananya Pillai",p:"Ravi Pillai",b:"Class 12 Physics",bal:2200,s:"due"}
+];
+const label={paid:"Paid",due:"Pending",part:"Partly paid"};
+const fmt=v=>v?"\u20b9"+v.toLocaleString("en-IN"):"\u2013";
+const tb=document.getElementById("rows"), bubble=document.getElementById("bubble");
+students.forEach((s,i)=>{
+  const tr=document.createElement("tr");
+  tr.innerHTML=`<td>${s.n}</td><td>${s.b}</td><td class="num">${fmt(s.bal)}</td><td><span class="chip ${s.s}">${label[s.s]}</span></td><td><button class="send" id="send-${i}" ${s.bal?"":"disabled"}>${s.bal?"Send":"\u2014"}</button></td>`;
+  tb.appendChild(tr);
+  if(s.bal) tr.querySelector("button").addEventListener("click",()=>{
+    bubble.innerHTML=`Namaste ${s.p}, ${s.n}'s Nov fee of \u20b9${s.bal.toLocaleString("en-IN")} is pending at Bright Minds Tuition Centre. UPI: brightminds@upi. Ignore if paid. Thanks!<small>To +91 parent's number \u00b7 opens in WhatsApp</small>`;
+    bubble.style.animation="none"; void bubble.offsetWidth; bubble.style.animation="";
+  });
+});
+</script>
+
+</body>
+</html>
