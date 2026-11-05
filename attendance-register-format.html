@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Student Attendance Register Format for Tuition Classes + % Formula | Format Wala</title>
+<meta name="description" content="Student attendance register format for tuition and coaching classes: columns, P/A/L codes, a sample register and the attendance percentage formula for Excel and Google Sheets.">
+<link rel="canonical" href="https://formatwala.github.io/attendance-register-format.html">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;600&display=swap">
+<style>:root{--paper:#FBFCFE;--paper2:#EEF3FA;--ink:#13315C;--text:#1E2A38;--muted:#5A6B80;--rule:#D3DEEC;--card:#fff;--mari:#E39B12;--mari-ink:#5A3A00;--ok:#1E7D4F}
+@media (prefers-color-scheme:dark){:root{--paper:#0E1622;--paper2:#152132;--ink:#A9C6EE;--text:#E3E9F1;--muted:#9AA9BC;--rule:#24344A;--card:#121D2C;--mari:#F2B33D;--mari-ink:#2A1B00;--ok:#7BD7A4;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--text);font:16px/1.65 "IBM Plex Sans","Segoe UI",system-ui,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right,0px)) 56px max(16px,env(safe-area-inset-left,0px))}
+h1,h2,h3{font-family:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;color:var(--ink);line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(28px,4.6vw,40px);margin:18px 0 10px}h2{font-size:23px;margin:36px 0 8px}h3{font-size:17px;margin:0 0 6px}
+a{color:var(--ink)}p{max-width:68ch}
+nav{font-size:14px;border-bottom:1px solid var(--rule);padding-bottom:12px;display:flex;flex-wrap:wrap;gap:6px 16px}nav b{margin-right:auto}
+.lede{font-size:18px}.eyebrow{font:500 12px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tpl{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;margin:12px 0;display:grid;gap:8px}
+.tpl .msg{white-space:pre-wrap;font-size:15px;background:var(--paper2);border-radius:8px;padding:10px 12px}
+.tpl button{justify-self:start;font:600 13px inherit;color:var(--ok);background:none;border:1px solid currentColor;border-radius:5px;padding:5px 12px;cursor:pointer}
+.tpl button:focus-visible,.btn:focus-visible{outline:3px solid var(--mari);outline-offset:2px}
+.note{font-size:14px;color:var(--muted)}
+.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card);font-variant-numeric:tabular-nums}
+th,td{border:1px solid var(--rule);padding:7px 10px;text-align:left;vertical-align:top}th{background:var(--paper2);color:var(--ink)}
+.cta{margin-top:40px;background:var(--ink);color:var(--paper);border-radius:12px;padding:22px}.cta h2{color:var(--paper);margin-top:0}
+.cta p{color:var(--paper)}.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.btn{display:inline-block;font-weight:600;padding:11px 18px;border-radius:6px;text-decoration:none}
+.btn.main{background:var(--mari);color:var(--mari-ink)}.btn.alt{border:2px solid var(--paper);color:var(--paper)}
+footer{margin-top:40px;border-top:1px solid var(--rule);padding-top:12px;font-size:13px;color:var(--muted)}footer a{color:inherit}
+code{font:14px "IBM Plex Mono",ui-monospace,monospace;background:var(--paper2);padding:1px 5px;border-radius:4px}</style>
+</head>
+<body>
+<div class="wrap">
+<nav><b><a href="index.html">Format Wala</a></b><a href="fee-reminder-message.html">Fee reminder messages</a><a href="tuition-fee-receipt-format.html">Fee receipt format</a><a href="attendance-register-format.html">Attendance register</a></nav>
+<h1>Student attendance register format for tuition classes</h1>
+<p class="lede">A simple student attendance register format for tuition and coaching classes: the columns to use, the P / A / L codes, and the formula that works out each student's attendance percentage.</p><h2>Columns in a monthly attendance register</h2><ul><li><strong>Student ID and name</strong>, one row per student.</li><li><strong>Batch</strong>, if you run more than one.</li><li><strong>One column per day of the month</strong> (1 to 31).</li><li><strong>Totals:</strong> days present, days absent and attendance percentage.</li></ul><h2>Codes to use</h2><p><strong>P</strong> = present, <strong>A</strong> = absent, <strong>L</strong> = leave informed in advance. Leave a cell blank on days with no class, so holidays do not count against anyone.</p><h2>Sample register</h2><div class="scroll"><table><tr><th>ID</th><th>Student</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>Present</th><th>Absent</th><th>Attendance %</th></tr><tr><td>S001</td><td>Aarav Sharma</td><td>P</td><td>P</td><td>A</td><td>P</td><td>P</td><td>4</td><td>1</td><td>80%</td></tr><tr><td>S002</td><td>Diya Iyer</td><td>P</td><td>P</td><td>P</td><td>P</td><td>P</td><td>5</td><td>0</td><td>100%</td></tr><tr><td>S003</td><td>Kabir Reddy</td><td>A</td><td>P</td><td>A</td><td>P</td><td>L</td><td>2</td><td>2</td><td>50%</td></tr></table></div><p class="note">Sample data. Attendance % counts only P and A days; L days are left out.</p><h2>Attendance percentage formula (Excel or Google Sheets)</h2><p>If a student's marks are in cells D6 to AH6:</p><p><code>=COUNTIF(D6:AH6,"P")/(COUNTIF(D6:AH6,"P")+COUNTIF(D6:AH6,"A"))</code></p><p>Format the cell as a percentage. Many centres talk to parents when attendance falls below 75%.</p><h2>Keep attendance and fees together</h2><p>When attendance and fees sit in the same file, it is easy to spot a student who stopped coming but still owes fees, or a family that needs a gentle call.</p>
+<div class="cta"><h2>Stop typing reminders one by one</h2><p>The Format Wala Tuition Fee Register writes each parent's reminder for you, with their name, the exact balance and your UPI ID, and opens WhatsApp in one tap. It also tracks part payments, receipts and attendance.</p><div class="btns"><a class="btn main" href="index.html">See the fee register &#8211; &#8377;499</a><a class="btn alt" href="FormatWala_Fee_Tracker_Lite_FREE.xlsx" download>Free Fee Tracker Lite</a></div></div>
+<footer>Format Wala &#183; Ready-made formats for Indian tuition centres and small businesses &#183; <a href="refund.html">Refunds</a> &#183; <a href="privacy.html">Privacy</a> &#183; <a href="terms.html">Terms</a> &#183; <a href="contact.html">Contact</a></footer>
+</div>
+<script>document.querySelectorAll('.tpl button').forEach(b=>b.addEventListener('click',async()=>{const t=b.parentElement.querySelector('.msg').innerText;
+try{await navigator.clipboard.writeText(t);b.textContent='Copied';}catch(e){const r=document.createRange();r.selectNodeContents(b.parentElement.querySelector('.msg'));
+const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected - press Ctrl+C';}setTimeout(()=>b.textContent='Copy message',2500);}));</script>
+</body>
+</html>
